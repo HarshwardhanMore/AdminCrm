@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes)=>{
                 permissions: []
             },
         },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         is_active: {
             type: DataTypes.BOOLEAN,
             allowNull: false

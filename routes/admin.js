@@ -3,10 +3,13 @@ const router = express.Router();
 const adminController = require('../controllers/adminController')
 
 
-router.post('/addAdmin', adminController.addAdmin);
-// router.post('/updateAdmin', adminController.updateAdmin);
-// router.post('/deleteAdmin', adminController.deleteAdmin);
+module.exports = (upload)=>{
 
-module.exports = router
+    router.post('/addAdmin', upload.single('image'), adminController.addAdmin);
+    router.post('/updateAdmin', adminController.updateAdmin);
+    router.post('/deleteAdmin', adminController.deleteAdmin);
+
+    return router;
+}
 
 
