@@ -17,6 +17,5 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.admin = require('./admin')(sequelize, Sequelize);
-db.permission = require('./permission')(sequelize, Sequelize);
 
 module.exports = db;
