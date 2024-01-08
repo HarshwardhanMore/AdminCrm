@@ -5,6 +5,7 @@ const adminController = require('../controllers/adminController')
 
 module.exports = (upload)=>{
 
+    router.post('/', adminController.getAllAdmins);
     router.post('/addAdmin', upload.single('image'), adminController.addAdmin);
     router.post('/updateAdmin', adminController.updateAdmin);
     router.post('/deleteAdmin', adminController.deleteAdmin);

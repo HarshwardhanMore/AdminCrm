@@ -4,6 +4,35 @@ const {buildResponce} = require('../helpers/buildResponce');
 const { admin } = require('../models');
 
 
+exports.getAllAdmins = async (req, res) => {
+    try {
+        const data = await adminService.getAllAdmins();
+        if (data != false) {
+            buildResponce(res, 200,
+                {
+                    error: false,
+                    message: "Admins Data Found!",
+                    data: data
+                })
+        } else {
+            buildResponce(res, 200,
+                {
+                    error: true,
+                    message: "Admins Data Not Found!",
+                    data: ''
+                })
+        }
+        return data;
+    } catch (error) {
+        buildResponce(res, 500,
+            {
+                error: true,
+                message: "Internal Server Error",
+                data: ''
+            })
+    }
+}
+
 
 exports.addAdmin = async (req, res) => {
 

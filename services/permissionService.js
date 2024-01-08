@@ -38,7 +38,7 @@ exports.updatePermission = async (permissionDetails)=>{
 
     try {
 
-        const findPermissionById = await Admin.findOne({
+        const findPermissionById = await Permission.findOne({
             where: {
                 id: permissionDetails.id
             }
@@ -76,9 +76,7 @@ exports.deletePermission = async (id)=>{
         //         id: id
         //     }
         // })
-        await Permission.update({
-            is_active: false
-        },{
+        await Permission.destroy({
             where: {
                 id: id
             }

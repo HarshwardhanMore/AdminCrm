@@ -5,6 +5,14 @@ const Admin  = db.admin;
 // db.Sequelize = Sequelize;
 // db.sequelize = sequelize;
 
+exports.getAllAdmins = async ()=>{
+    try {
+        const data = await Admin.findAll();
+        return data;
+    } catch (error) {
+        throw new Error("Error adding user enquiry"+error.message);
+    }
+}
 
 exports.addAdmin = async (adminDetails)=>{
 
