@@ -16,12 +16,8 @@ const db = {}
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.contact = require('./contact')(sequelize, Sequelize);
-db.userEnquiry = require('./userEnquiry')(sequelize, Sequelize);
-db.enterpriseEnquiry = require('./enterpriseEnquiry')(sequelize, Sequelize);
-db.newsletter = require('./newsletter')(sequelize, Sequelize);
-
 db.admin = require('./admin')(sequelize, Sequelize);
+db.permission = require('./permission')(sequelize, Sequelize);
 
 
 

@@ -1,56 +1,29 @@
-const contactService = require('../services/contactService');
+
+const permissionService = require('../services/permissionService');
 const {buildResponce} = require('../helpers/buildResponce');
+// const { permission } = require('../models');
 
 
 
-exports.addContactDetails = async (req, res) => {
+exports.addPermission = async (req, res) => {
 
     try {
-        const contactDetails = req.body;
-        const data = await contactService.addContactDetails(contactDetails);
-        if (data != null) {
+        const { permission_name } = req.body;
+        
+        
+        const data = await permissionService.addPermission(permission_name);
+        if (data != false) {
             buildResponce(res, 200,
                 {
                     error: false,
-                    message: "Contact details Added successfully",
+                    message: "Admin added successfully! ",
                     data: ''
                 })
         } else {
             buildResponce(res, 200,
                 {
                     error: true,
-                    message: "Unable to add contact details, please try again",
-                    data: ''
-                })
-        }
-    } catch (error) {
-        console.log(error);
-
-        buildResponce(res, 500,
-            {
-                error: true,
-                message: "Internal Server Error",
-                data: ''
-            })
-    }
-
-}
-exports.getAllContactDetails = async (req, res) => {
-
-    try {
-        const data = await contactService.getAllContactDetails();
-        if (data != null) {
-            buildResponce(res, 200,
-                {
-                    error: false,
-                    message: "Fetched all contact details successfully",
-                    data: data
-                })
-        } else {
-            buildResponce(res, 200,
-                {
-                    error: true,
-                    message: "Unable to fetch contact details, please try again",
+                    message: "Admin already exists!",
                     data: ''
                 })
         }
@@ -66,23 +39,58 @@ exports.getAllContactDetails = async (req, res) => {
     }
 
 }
-exports.getContactDetailsById = async (req, res) => {
+
+exports.updatePermission = async (req, res) => {
 
     try {
-        const dataFetchFilter = req.body;
-        const data = await contactService.getContactDetailsById(dataFetchFilter.id);
-        if (data != null) {
+        const { permission_name } = req.body;
+        
+        const data = await permissionService.updateAdmin(permission_name);
+        if (data != false) {
             buildResponce(res, 200,
                 {
                     error: false,
-                    message: "Fetched contact details successfully",
-                    data: data
+                    message: "Permission updated successfully! ",
+                    data: ''
                 })
         } else {
             buildResponce(res, 200,
                 {
                     error: true,
-                    message: "Unable to fetch contact details, please try again",
+                    message: "Permission does not exists!",
+                    data: ''
+                })
+        }
+    } catch (error) {
+        console.log(error);
+
+        buildResponce(res, 500,
+            {
+                error: true,
+                message: "Internal Server Error",
+                data: ''
+            })
+    }
+
+}
+exports.deletePermission = async (req, res) => {
+
+    try {
+        const { id } = req.body;
+        
+        const data = await permissionService.deletePermission(id);
+        if (data != false) {
+            buildResponce(res, 200,
+                {
+                    error: false,
+                    message: "Permission deleted successfully! ",
+                    data: ''
+                })
+        } else {
+            buildResponce(res, 200,
+                {
+                    error: true,
+                    message: "Permission does not exists!",
                     data: ''
                 })
         }
