@@ -7,8 +7,8 @@ module.exports = (upload)=>{
 
     router.post('/', adminController.getAllAdmins);
     router.post('/addAdmin', upload.single('image'), adminController.addAdmin);
-    router.post('/updateAdmin', adminController.updateAdmin);
-    router.post('/deleteAdmin', adminController.deleteAdmin);
+    router.post('/updateAdmin/:id', adminController.updateAdmin);
+    router.post('/deleteAdmin/:id', adminController.deleteAdmin);
 
     return router;
 }

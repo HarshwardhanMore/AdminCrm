@@ -1,4 +1,3 @@
-
 const adminService = require('../services/adminService');
 const {buildResponce} = require('../helpers/buildResponce');
 const { admin } = require('../models');
@@ -82,7 +81,8 @@ exports.addAdmin = async (req, res) => {
 exports.updateAdmin = async (req, res) => {
 
     try {
-        const { id, first_name, last_name, email, phone_number, password, admin_permissions, is_active } = req.body;
+        const { id } = req.params;
+        const { first_name, last_name, email, phone_number, password, admin_permissions, is_active } = req.body;
         
         const adminDetails = {
             id: id,
@@ -126,7 +126,7 @@ exports.updateAdmin = async (req, res) => {
 exports.deleteAdmin = async (req, res) => {
 
     try {
-        const { id } = req.body;
+        const { id } = req.params;
         
         const data = await adminService.deleteAdmin(id);
         if (data != false) {
