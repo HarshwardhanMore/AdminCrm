@@ -69,3 +69,6 @@ _site/
 *.jar
 *.war
 *.ear
+
+
+/uploads/

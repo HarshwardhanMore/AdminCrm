@@ -26,7 +26,7 @@ exports.getAllAdmins = async (req, res) => {
         buildResponce(res, 500,
             {
                 error: true,
-                message: "Internal Server Error",
+                message: "Internal Server Error"+error.message,
                 data: ''
             })
     }
@@ -36,8 +36,13 @@ exports.getAllAdmins = async (req, res) => {
 exports.addAdmin = async (req, res) => {
 
     try {
-        const { first_name, last_name, email, phone_number, password, admin_permissions} = req.body;
-        const { file_name } = req.file || "";
+        const { first_name, last_name, email, phone_number, password} = req.body;
+        const { filename } = req.file;
+
+        console.log(req.body);
+        console.log(req.file);
+        console.log(req.file.filename);
+        console.log(req.file.originalname);
 
         const adminDetails = {
             first_name: first_name,
@@ -45,8 +50,8 @@ exports.addAdmin = async (req, res) => {
             email: email,
             phone_number: phone_number,
             password: password,
-            admin_permissions: admin_permissions,
-            image: `uploads/${file_name}`,
+            admin_permissions: { permission: [2,3]},
+            file: filename,
             is_active: true,
         }
         const data = await adminService.addAdmin(adminDetails);

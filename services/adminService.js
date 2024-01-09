@@ -10,7 +10,7 @@ exports.getAllAdmins = async ()=>{
         const data = await Admin.findAll();
         return data;
     } catch (error) {
-        throw new Error("Error adding user enquiry"+error.message);
+        throw new Error(" Error fetching admins data "+error.message);
     }
 }
 
@@ -52,7 +52,6 @@ exports.updateAdmin = async (adminDetails)=>{
         }
 
         await Admin.update({
-            id: adminDetails.id,
             first_name: adminDetails.first_name,
             last_name: adminDetails.last_name,
             phone_number: adminDetails.phone_number,
@@ -61,7 +60,7 @@ exports.updateAdmin = async (adminDetails)=>{
             is_active: adminDetails.is_active
         },{
             where: {
-                email: adminDetails.email
+                id: adminDetails.id
             }
         })
         return true;

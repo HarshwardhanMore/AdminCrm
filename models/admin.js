@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes)=>{
                 permissions: []
             },
         },
-        image: {
+        file: {
             type: DataTypes.STRING,
             allowNull: true,
         },

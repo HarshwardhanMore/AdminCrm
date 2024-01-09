@@ -22,22 +22,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/'); // Save files in the 'uploads' directory
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    },
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // The folder where uploaded files will be stored
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Use the original filename for the uploaded file
+  },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
+
 // ----------------------------------------------------------------
 
-app.use('/uploads', express.static('uploads'));
+// app.use('/uploads', express.static('uploads'));
 
 
+// Step 6: Set up a route to serve an HTML form for file uploads
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+  });
+  
 
 app.use(require('./routes')(upload));
+
+
 
 db.sequelize.sync().then(()=>{
     console.log('Models Sync Successfully')
