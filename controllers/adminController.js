@@ -36,13 +36,8 @@ exports.getAllAdmins = async (req, res) => {
 exports.addAdmin = async (req, res) => {
 
     try {
-        const { first_name, last_name, email, phone_number, password} = req.body;
+        const { first_name, last_name, email, phone_number, password, admin_permissions} = req.body;
         const { filename } = req.file;
-
-        console.log(req.body);
-        console.log(req.file);
-        console.log(req.file.filename);
-        console.log(req.file.originalname);
 
         const adminDetails = {
             first_name: first_name,
@@ -50,7 +45,7 @@ exports.addAdmin = async (req, res) => {
             email: email,
             phone_number: phone_number,
             password: password,
-            admin_permissions: { permission: [2,3]},
+            admin_permissions: admin_permissions,
             file: filename,
             is_active: true,
         }
